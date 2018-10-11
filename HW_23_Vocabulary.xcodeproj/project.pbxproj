@@ -8,20 +8,30 @@
 
 /* Begin PBXBuildFile section */
 		E3B98713216EB433008AE543 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3B98712216EB433008AE543 /* AppDelegate.swift */; };
-		E3B98715216EB433008AE543 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3B98714216EB433008AE543 /* ViewController.swift */; };
 		E3B98718216EB433008AE543 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3B98716216EB433008AE543 /* Main.storyboard */; };
 		E3B9871A216EB43F008AE543 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E3B98719216EB43F008AE543 /* Assets.xcassets */; };
 		E3B9871D216EB43F008AE543 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3B9871B216EB43F008AE543 /* LaunchScreen.storyboard */; };
+		E3B98729216EB88C008AE543 /* WordsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3B98728216EB88C008AE543 /* WordsListViewController.swift */; };
+		E3B9872B216EB8A2008AE543 /* NewWordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3B9872A216EB8A2008AE543 /* NewWordViewController.swift */; };
+		E3B9872D216EB8B8008AE543 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3B9872C216EB8B8008AE543 /* DetailViewController.swift */; };
+		E3B9872F216EC4CC008AE543 /* WordTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3B9872E216EC4CC008AE543 /* WordTableViewCell.swift */; };
+		E3B98731216F938D008AE543 /* Word.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3B98730216F938D008AE543 /* Word.swift */; };
+		E3B98733216F9BDE008AE543 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3B98732216F9BDE008AE543 /* DataManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		E3B9870F216EB433008AE543 /* HW_23_Vocabulary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HW_23_Vocabulary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3B98712216EB433008AE543 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		E3B98714216EB433008AE543 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		E3B98717216EB433008AE543 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E3B98719216EB43F008AE543 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E3B9871C216EB43F008AE543 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E3B9871E216EB43F008AE543 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E3B98728216EB88C008AE543 /* WordsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordsListViewController.swift; sourceTree = "<group>"; };
+		E3B9872A216EB8A2008AE543 /* NewWordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewWordViewController.swift; sourceTree = "<group>"; };
+		E3B9872C216EB8B8008AE543 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		E3B9872E216EC4CC008AE543 /* WordTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordTableViewCell.swift; sourceTree = "<group>"; };
+		E3B98730216F938D008AE543 /* Word.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Word.swift; sourceTree = "<group>"; };
+		E3B98732216F9BDE008AE543 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,14 +64,51 @@
 		E3B98711216EB433008AE543 /* HW_23_Vocabulary */ = {
 			isa = PBXGroup;
 			children = (
-				E3B98712216EB433008AE543 /* AppDelegate.swift */,
-				E3B98714216EB433008AE543 /* ViewController.swift */,
+				E3B98724216EB7B3008AE543 /* Model */,
+				E3B98725216EB7C3008AE543 /* Views */,
+				E3B98726216EB7CA008AE543 /* Controllers */,
 				E3B98716216EB433008AE543 /* Main.storyboard */,
+				E3B98727216EB7D1008AE543 /* Supporting files */,
+			);
+			path = HW_23_Vocabulary;
+			sourceTree = "<group>";
+		};
+		E3B98724216EB7B3008AE543 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E3B98730216F938D008AE543 /* Word.swift */,
+				E3B98732216F9BDE008AE543 /* DataManager.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		E3B98725216EB7C3008AE543 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				E3B9872E216EC4CC008AE543 /* WordTableViewCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		E3B98726216EB7CA008AE543 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				E3B98728216EB88C008AE543 /* WordsListViewController.swift */,
+				E3B9872A216EB8A2008AE543 /* NewWordViewController.swift */,
+				E3B9872C216EB8B8008AE543 /* DetailViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		E3B98727216EB7D1008AE543 /* Supporting files */ = {
+			isa = PBXGroup;
+			children = (
+				E3B98712216EB433008AE543 /* AppDelegate.swift */,
 				E3B98719216EB43F008AE543 /* Assets.xcassets */,
 				E3B9871B216EB43F008AE543 /* LaunchScreen.storyboard */,
 				E3B9871E216EB43F008AE543 /* Info.plist */,
 			);
-			path = HW_23_Vocabulary;
+			name = "Supporting files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -135,8 +182,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E3B98715216EB433008AE543 /* ViewController.swift in Sources */,
+				E3B98729216EB88C008AE543 /* WordsListViewController.swift in Sources */,
 				E3B98713216EB433008AE543 /* AppDelegate.swift in Sources */,
+				E3B9872B216EB8A2008AE543 /* NewWordViewController.swift in Sources */,
+				E3B98733216F9BDE008AE543 /* DataManager.swift in Sources */,
+				E3B9872D216EB8B8008AE543 /* DetailViewController.swift in Sources */,
+				E3B9872F216EC4CC008AE543 /* WordTableViewCell.swift in Sources */,
+				E3B98731216F938D008AE543 /* Word.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
