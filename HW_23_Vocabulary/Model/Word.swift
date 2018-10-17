@@ -8,7 +8,11 @@
 
 import Foundation
 
-struct Word {
+struct Word: Equatable {
     let englishWord: String
     let translateWord: String
+
+    static func == (lhs: Word, rhs: Word) -> Bool {
+        return lhs.englishWord == rhs.englishWord && lhs.translateWord == rhs.translateWord
+    }
 }

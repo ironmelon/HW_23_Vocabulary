@@ -16,6 +16,7 @@ final class DataManager {
     }
 
     private(set) var words: [Word] = []
+    private(set) var learnedWords: [Word] = []
 
     private func generateMockWords() {
         let word1 = Word(englishWord: "Ball", translateWord: "Мяч")
@@ -26,7 +27,20 @@ final class DataManager {
         words = [word1, word2, word3, word4, word5]
     }
 
+    //MARK: - Public functions
     func addNewWord(_ word: Word) {
-        words.append(word)
+        words.insert(word, at: 0)
+    }
+
+    func markAsLearned(_ word: Word) {
+        guard let removeIndex = words.index(of: word) else { return }
+        words.remove(at: removeIndex)
+        learnedWords.insert(word, at: 0)
+    }
+
+    func markAsUnlearned(_ word: Word) {
+        guard let removeIndex = learnedWords.index(of: word) else { return }
+        learnedWords.remove(at: removeIndex)
+        words.insert(word, at: 0)
     }
 }

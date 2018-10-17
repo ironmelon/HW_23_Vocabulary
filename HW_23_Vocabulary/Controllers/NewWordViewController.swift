@@ -41,7 +41,7 @@ class NewWordViewController: UIViewController {
     }
 }
 
-// MARK: Extensions
+// MARK: - Extensions
 extension NewWordViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == englishTextField {
