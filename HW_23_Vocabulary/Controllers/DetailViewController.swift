@@ -12,12 +12,12 @@ protocol DetailViewDelegate: class {
     func didLearnWord()
 }
 
-enum ContentType {
-    case word
-    case learnedWord
-}
-
 class DetailViewController: UIViewController {
+
+    enum ContentType {
+        case word
+        case learnedWord
+    }
 
     @IBOutlet private weak var englishLabel: UILabel!
     @IBOutlet private weak var russianLabel: UILabel!
@@ -52,7 +52,3 @@ class DetailViewController: UIViewController {
         navigationController?.popViewController(animated: true)
     }
 }
-
-
-
-

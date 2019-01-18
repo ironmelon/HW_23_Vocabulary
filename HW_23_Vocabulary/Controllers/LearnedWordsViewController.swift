@@ -9,7 +9,7 @@
 import UIKit
 
 protocol LearnedWordsDelegate: class {
-    func didUnlearnkWord()
+    func didUnlearnWord()
 }
 
 class LearnedWordsViewController: UIViewController {
@@ -29,7 +29,7 @@ class LearnedWordsViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         if currentWords > DataManager.instance.learnedWords.count {
-            delegate?.didUnlearnkWord()
+            delegate?.didUnlearnWord()
         }
     }
 
@@ -41,15 +41,15 @@ class LearnedWordsViewController: UIViewController {
         guard let indexPath = tableView.indexPath(for: tableCell) else { return }
         let learnedWord = DataManager.instance.learnedWords[indexPath.row]
         destVC.word = learnedWord
-        destVC.screen = ContentType.learnedWord
+        destVC.screen = .learnedWord 
         destVC.delegate = self
     }
 }
 
 // MARK: - Extensions
-extension LearnedWordsViewController: UITableViewDelegate, UITableViewDataSource, DetailViewDelegate {
 
-    // UITableViewDelegate, UITableViewDataSource
+extension LearnedWordsViewController: UITableViewDelegate, UITableViewDataSource {
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return DataManager.instance.learnedWords.count
     }
@@ -64,9 +64,8 @@ extension LearnedWordsViewController: UITableViewDelegate, UITableViewDataSource
         cell.update(engWord: learnedWord.englishWord, transWord: learnedWord.translateWord)
         return cell
     }
+}
 
-    // DetailViewDelegate
-    func didLearnWord() {
-        tableView.reloadData()
-    }
+extension LearnedWordsViewController: DetailViewDelegate {
+        func didLearnWord() { tableView.reloadData() }
 }

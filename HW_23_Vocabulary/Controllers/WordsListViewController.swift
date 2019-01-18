@@ -21,28 +21,32 @@ class WordsListViewController: UIViewController {
 
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showDetailVC" {
-        guard let destVC = segue.destination as? DetailViewController else { return }
-        guard let tableCell = sender as? WordTableViewCell else { return }
-        guard let indexPath = tableView.indexPath(for: tableCell) else { return }
-        let word = DataManager.instance.words[indexPath.row]
-        destVC.screen = .word
-        destVC.delegate = self
-        destVC.word = word
-        } else if segue.identifier == "showNewWordVC" {
+
+        switch segue.identifier {
+        case "showDetailVC":
+            guard let destVC = segue.destination as? DetailViewController else { return }
+            guard let tableCell = sender as? WordTableViewCell else { return }
+            guard let indexPath = tableView.indexPath(for: tableCell) else { return }
+            let word = DataManager.instance.words[indexPath.row]
+            destVC.screen = .word
+            destVC.delegate = self
+            destVC.word = word
+        case "showNewWordVC":
             guard let destVC = segue.destination as? NewWordViewController else { return }
             destVC.delegate = self
-        } else if segue.identifier == "showLearnedWords" {
+        case "showLearnedWords":
             guard let destVC = segue.destination as? LearnedWordsViewController else { return }
             destVC.delegate = self
-        } else { return }
+        default:
+            return
+        }
     }
 }
 
 // MARK: - Extansions
-extension WordsListViewController: UITableViewDelegate, UITableViewDataSource, NewWordDelegate, DetailViewDelegate, LearnedWordsDelegate {
 
-    //UITableViewDelegate, UITableViewDataSource
+extension WordsListViewController: UITableViewDelegate, UITableViewDataSource {
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return DataManager.instance.words.count
     }
@@ -57,25 +61,16 @@ extension WordsListViewController: UITableViewDelegate, UITableViewDataSource, N
         cell.update(englishWord: word.englishWord)
         return cell
     }
-
-    //NewWordAddedDelegate
-    func didAddNewWordToWordsList() {
-        tableView.reloadData()
-    }
-
-    // DetailViewDelegate
-    func didLearnWord() {
-        tableView.reloadData()
-    }
-
-    // LearnedWordsDelegate
-    func didUnlearnkWord() {
-        tableView.reloadData()
-    }
 }
 
+extension WordsListViewController: NewWordDelegate {
+    func didAddNewWordToWordsList() { tableView.reloadData() }
+}
 
+extension WordsListViewController: DetailViewDelegate {
+    func didLearnWord() { tableView.reloadData() }
+}
 
-
-
-
+extension WordsListViewController: LearnedWordsDelegate {
+    func didUnlearnWord() { tableView.reloadData() }
+}
