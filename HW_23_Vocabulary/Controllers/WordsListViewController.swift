@@ -9,14 +9,39 @@
 import UIKit
 
 class WordsListViewController: UIViewController {
-
-    @IBOutlet private weak var tableView: UITableView!
     
+    @IBOutlet private weak var searchBar: UISearchBar!
+    @IBOutlet private weak var tableView: UITableView!
+    var filteredWords = [Word]()
+    var isActiveSearch = false
+
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Words List"
         tableView.delegate = self
         tableView.dataSource = self
+        searchBar.delegate = self
+        tableView.keyboardDismissMode = .onDrag
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if isActiveSearch {
+            isActiveSearch = false
+            tableView.reloadData()
+        }
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        if isActiveSearch {
+        searchBar.text = ""
+        hideKeyboard()
+        }
+    }
+
+    private func hideKeyboard() {
+        view.endEditing(true)
     }
 
     // MARK: - Navigation
@@ -27,7 +52,7 @@ class WordsListViewController: UIViewController {
             guard let destVC = segue.destination as? DetailViewController else { return }
             guard let tableCell = sender as? WordTableViewCell else { return }
             guard let indexPath = tableView.indexPath(for: tableCell) else { return }
-            let word = DataManager.instance.words[indexPath.row]
+            let word = isActiveSearch ? filteredWords[indexPath.row] : DataManager.instance.words[indexPath.row]
             destVC.screen = .word
             destVC.delegate = self
             destVC.word = word
@@ -48,7 +73,7 @@ class WordsListViewController: UIViewController {
 extension WordsListViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return DataManager.instance.words.count
+        return isActiveSearch ? filteredWords.count : DataManager.instance.words.count
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -56,10 +81,31 @@ extension WordsListViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "WordTableViewCell", for: indexPath) as! WordTableViewCell
-        let word = DataManager.instance.words[indexPath.row]
+      guard let cell = tableView.dequeueReusableCell(withIdentifier: "WordTableViewCell", for: indexPath) as? WordTableViewCell else {
+            fatalError("WorldTableViewCell creation failed.")
+        }
+        let word = isActiveSearch ? filteredWords[indexPath.row] : DataManager.instance.words[indexPath.row]
         cell.update(englishWord: word.englishWord)
         return cell
+    }
+}
+
+extension WordsListViewController: UISearchBarDelegate {
+
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        isActiveSearch = !searchText.isEmpty
+        filteredWords = []
+
+        for word in DataManager.instance.words {
+            if word.englishWord.lowercased().contains(searchText.lowercased()) {
+                filteredWords.append(word)
+            }
+        }
+        tableView.reloadData()
+    }
+
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        hideKeyboard()
     }
 }
 

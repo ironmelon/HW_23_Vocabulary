@@ -26,8 +26,25 @@ class NewWordViewController: UIViewController {
         russianTextField.delegate = self
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        addObservers()
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self)
+    }
+
+    // MARK: - Methods
+
     private func hideKeyboard() {
         view.endEditing(true)
+    }
+
+    private func addObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
 
     // MARK: - Actions
@@ -38,6 +55,15 @@ class NewWordViewController: UIViewController {
         DataManager.instance.addNewWord(newWord)
         delegate?.didAddNewWordToWordsList()
         navigationController?.popViewController(animated: true)
+    }
+
+    // MARK: - Selectors
+    @objc private func handleKeyboardWillShow(_ notification: Notification) {
+        view.backgroundColor = .darkGray
+    }
+
+    @objc private func handleKeyboardWillHide(_ notification: Notification) {
+        view.backgroundColor = .lightGray
     }
 }
 

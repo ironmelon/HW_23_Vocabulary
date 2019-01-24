@@ -14,23 +14,44 @@ protocol LearnedWordsDelegate: class {
 
 class LearnedWordsViewController: UIViewController {
 
+    @IBOutlet private weak var searchBar: UISearchBar!
     @IBOutlet private weak var tableView: UITableView!
     weak var delegate: LearnedWordsDelegate?
     var currentWords: Int = 0
+    var filteredWords = [Word]()
+    var isActiveSearch = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Learned Words"
         tableView.delegate = self
         tableView.dataSource = self
+        searchBar.delegate = self
+        tableView.keyboardDismissMode = .onDrag
         currentWords = DataManager.instance.learnedWords.count
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if isActiveSearch {
+            isActiveSearch = false
+            tableView.reloadData()
+        }
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        if isActiveSearch {
+            searchBar.text = ""
+            hideKeyboard()
+        }
         if currentWords > DataManager.instance.learnedWords.count {
             delegate?.didUnlearnWord()
         }
+    }
+
+    private func hideKeyboard() {
+        view.endEditing(true)
     }
 
     // MARK: - Navigation
@@ -51,7 +72,7 @@ class LearnedWordsViewController: UIViewController {
 extension LearnedWordsViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return DataManager.instance.learnedWords.count
+        return isActiveSearch ? filteredWords.count : DataManager.instance.learnedWords.count
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -59,10 +80,32 @@ extension LearnedWordsViewController: UITableViewDelegate, UITableViewDataSource
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "LearnedWordTableViewCell", for: indexPath) as! LearnedWordTableViewCell
-        let learnedWord = DataManager.instance.learnedWords[indexPath.row]
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "LearnedWordTableViewCell", for: indexPath) as? LearnedWordTableViewCell else {
+            fatalError("LearnedWordTableViewCell creation failed.")
+        }
+        let learnedWord = isActiveSearch ? filteredWords[indexPath.row] : DataManager.instance.learnedWords[indexPath.row]
         cell.update(engWord: learnedWord.englishWord, transWord: learnedWord.translateWord)
         return cell
+    }
+}
+
+extension LearnedWordsViewController: UISearchBarDelegate {
+
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        isActiveSearch = !searchText.isEmpty
+        filteredWords = []
+
+        for word in DataManager.instance.learnedWords {
+            if word.englishWord.lowercased().contains(searchText.lowercased()) ||
+                word.translateWord.lowercased().contains(searchText.lowercased()) {
+                filteredWords.append(word)
+            }
+        }
+        tableView.reloadData()
+    }
+
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        hideKeyboard()
     }
 }
 

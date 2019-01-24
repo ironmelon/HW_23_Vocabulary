@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Zpx-vz-lmY">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="120" width="375" height="547"/>
                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="WordTableViewCell" rowHeight="40" id="Fwc-EX-fVc" customClass="WordTableViewCell" customModule="HW_23_Vocabulary" customModuleProvider="target">
@@ -62,13 +62,20 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="usK-5J-R66">
+                                <rect key="frame" x="0.0" y="64" width="375" height="56"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="Zpx-vz-lmY" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="1Qw-Vw-d4J"/>
+                            <constraint firstItem="Zpx-vz-lmY" firstAttribute="top" secondItem="usK-5J-R66" secondAttribute="bottom" id="EWG-8A-2wW"/>
                             <constraint firstItem="Zpx-vz-lmY" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="NOh-8a-H8B"/>
+                            <constraint firstItem="usK-5J-R66" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="SaQ-wd-C6c"/>
+                            <constraint firstItem="usK-5J-R66" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Ubt-Rz-idI"/>
                             <constraint firstItem="Zpx-vz-lmY" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="YR6-h4-EH8"/>
-                            <constraint firstItem="Zpx-vz-lmY" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="hq9-Ga-JhW"/>
+                            <constraint firstItem="usK-5J-R66" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="nlX-eM-b4z"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -86,6 +93,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="searchBar" destination="usK-5J-R66" id="vfl-nI-Efd"/>
                         <outlet property="tableView" destination="Zpx-vz-lmY" id="2it-fJ-Qok"/>
                     </connections>
                 </viewController>
@@ -178,7 +186,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="C75-tL-4jz">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="120" width="375" height="547"/>
                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="LearnedWordTableViewCell" rowHeight="70" id="jsP-F9-vQX" customClass="LearnedWordTableViewCell" customModule="HW_23_Vocabulary" customModuleProvider="target">
@@ -250,17 +258,25 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="eBh-28-UUX">
+                                <rect key="frame" x="0.0" y="64" width="375" height="56"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="C75-tL-4jz" firstAttribute="top" secondItem="VFs-MQ-k1V" secondAttribute="top" id="8e2-lt-sWB"/>
+                            <constraint firstItem="VFs-MQ-k1V" firstAttribute="trailing" secondItem="eBh-28-UUX" secondAttribute="trailing" id="5Zo-W6-lXs"/>
                             <constraint firstItem="VFs-MQ-k1V" firstAttribute="trailing" secondItem="C75-tL-4jz" secondAttribute="trailing" id="9tH-JW-PkE"/>
                             <constraint firstItem="VFs-MQ-k1V" firstAttribute="bottom" secondItem="C75-tL-4jz" secondAttribute="bottom" id="Gd1-DJ-Mqz"/>
                             <constraint firstItem="C75-tL-4jz" firstAttribute="leading" secondItem="VFs-MQ-k1V" secondAttribute="leading" id="Uph-su-Of3"/>
+                            <constraint firstItem="eBh-28-UUX" firstAttribute="leading" secondItem="t36-0e-oaC" secondAttribute="leading" id="Vpf-CI-DHt"/>
+                            <constraint firstItem="eBh-28-UUX" firstAttribute="top" secondItem="VFs-MQ-k1V" secondAttribute="top" id="iFV-px-DcE"/>
+                            <constraint firstItem="C75-tL-4jz" firstAttribute="top" secondItem="eBh-28-UUX" secondAttribute="bottom" id="ssP-DA-MHd"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="VFs-MQ-k1V"/>
                     </view>
                     <connections>
+                        <outlet property="searchBar" destination="eBh-28-UUX" id="H2e-Gj-fMq"/>
                         <outlet property="tableView" destination="C75-tL-4jz" id="u4o-QO-Ys7"/>
                     </connections>
                 </viewController>
@@ -379,6 +395,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="ty9-de-Tda"/>
+        <segue reference="rr5-Az-yYX"/>
     </inferredMetricsTieBreakers>
 </document>
