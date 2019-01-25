@@ -16,7 +16,11 @@ class LearnedWordsViewController: UIViewController {
 
     @IBOutlet private weak var searchBar: UISearchBar!
     @IBOutlet private weak var tableView: UITableView!
+
+    static let identifier = "LearnedWordsViewController"
+
     weak var delegate: LearnedWordsDelegate?
+
     var currentWords: Int = 0
     var filteredWords = [Word]()
     var isActiveSearch = false
@@ -24,10 +28,13 @@ class LearnedWordsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Learned Words"
+
         tableView.delegate = self
         tableView.dataSource = self
-        searchBar.delegate = self
         tableView.keyboardDismissMode = .onDrag
+        tableView.register(LearnedWordTableViewCell.nib, forCellReuseIdentifier: LearnedWordTableViewCell.identifier)
+
+        searchBar.delegate = self
         currentWords = DataManager.instance.learnedWords.count
     }
 
@@ -53,18 +60,6 @@ class LearnedWordsViewController: UIViewController {
     private func hideKeyboard() {
         view.endEditing(true)
     }
-
-    // MARK: - Navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard segue.identifier == "showDetailVC" else { return }
-        guard let destVC = segue.destination as? DetailViewController else { return }
-        guard let tableCell = sender as? LearnedWordTableViewCell else { return }
-        guard let indexPath = tableView.indexPath(for: tableCell) else { return }
-        let learnedWord = DataManager.instance.learnedWords[indexPath.row]
-        destVC.word = learnedWord
-        destVC.screen = .learnedWord 
-        destVC.delegate = self
-    }
 }
 
 // MARK: - Extensions
@@ -77,15 +72,34 @@ extension LearnedWordsViewController: UITableViewDelegate, UITableViewDataSource
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        guard let detailVC = storyboard.instantiateViewController(withIdentifier: DetailViewController.identifier) as? DetailViewController else {
+            fatalError("DetailViewController open failed")
+        }
+        let learnedWord = DataManager.instance.learnedWords[indexPath.row]
+        detailVC.word = learnedWord
+        detailVC.screen = .learnedWord
+        detailVC.delegate = self
+        navigationController?.pushViewController(detailVC, animated: true)
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "LearnedWordTableViewCell", for: indexPath) as? LearnedWordTableViewCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: LearnedWordTableViewCell.identifier, for: indexPath) as? LearnedWordTableViewCell else {
             fatalError("LearnedWordTableViewCell creation failed.")
         }
         let learnedWord = isActiveSearch ? filteredWords[indexPath.row] : DataManager.instance.learnedWords[indexPath.row]
         cell.update(engWord: learnedWord.englishWord, transWord: learnedWord.translateWord)
         return cell
+    }
+
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        guard editingStyle == .delete else { return }
+        DataManager.instance.removeWordFromLearnedAtIndex(indexPath.row)
+        tableView.deleteRows(at: [indexPath], with: .fade)
     }
 }
 

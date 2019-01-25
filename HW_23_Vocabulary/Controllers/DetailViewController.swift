@@ -23,7 +23,10 @@ class DetailViewController: UIViewController {
     @IBOutlet private weak var russianLabel: UILabel!
     @IBOutlet private weak var pressButton: UIButton!
 
+    static let identifier = "DetailViewController"
+
     weak var delegate: DetailViewDelegate?
+
     var word: Word?
     var screen: ContentType?
     

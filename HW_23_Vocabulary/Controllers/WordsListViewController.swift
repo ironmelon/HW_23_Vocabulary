@@ -18,10 +18,14 @@ class WordsListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Words List"
+
         tableView.delegate = self
         tableView.dataSource = self
-        searchBar.delegate = self
+        tableView.isEditing = false
         tableView.keyboardDismissMode = .onDrag
+        tableView.register(WordTableViewCell.nib, forCellReuseIdentifier: WordTableViewCell.identifier)
+
+        searchBar.delegate = self
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -44,18 +48,14 @@ class WordsListViewController: UIViewController {
         view.endEditing(true)
     }
 
+    // MARK: - Actions
+    @IBAction func editPressed(_ sender: Any) {
+        tableView.isEditing = !tableView.isEditing
+    }
+    
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-
         switch segue.identifier {
-        case "showDetailVC":
-            guard let destVC = segue.destination as? DetailViewController else { return }
-            guard let tableCell = sender as? WordTableViewCell else { return }
-            guard let indexPath = tableView.indexPath(for: tableCell) else { return }
-            let word = isActiveSearch ? filteredWords[indexPath.row] : DataManager.instance.words[indexPath.row]
-            destVC.screen = .word
-            destVC.delegate = self
-            destVC.word = word
         case "showNewWordVC":
             guard let destVC = segue.destination as? NewWordViewController else { return }
             destVC.delegate = self
@@ -78,15 +78,40 @@ extension WordsListViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        guard let detailVC = storyboard.instantiateViewController(withIdentifier: DetailViewController.identifier) as? DetailViewController else {
+            fatalError("DetailViewController open failed")
+        }
+        let word = isActiveSearch ? filteredWords[indexPath.row] : DataManager.instance.words[indexPath.row]
+        detailVC.screen = .word
+        detailVC.delegate = self
+        detailVC.word = word
+        navigationController?.pushViewController(detailVC, animated: true)
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-      guard let cell = tableView.dequeueReusableCell(withIdentifier: "WordTableViewCell", for: indexPath) as? WordTableViewCell else {
+      guard let cell = tableView.dequeueReusableCell(withIdentifier: WordTableViewCell.identifier, for: indexPath) as? WordTableViewCell else {
             fatalError("WorldTableViewCell creation failed.")
         }
         let word = isActiveSearch ? filteredWords[indexPath.row] : DataManager.instance.words[indexPath.row]
         cell.update(englishWord: word.englishWord)
         return cell
+    }
+
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        return .none
+    }
+
+    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        DataManager.instance.moveWordFrom(sourceIndexPath.row, to: destinationIndexPath.row)
     }
 }
 

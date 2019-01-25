@@ -17,6 +17,8 @@ class NewWordViewController: UIViewController {
     @IBOutlet private weak var englishTextField: UITextField!
     @IBOutlet private weak var russianTextField: UITextField!
 
+    static let identifier = "NewWordViewController"
+
     weak var delegate: NewWordDelegate?
 
     override func viewDidLoad() {

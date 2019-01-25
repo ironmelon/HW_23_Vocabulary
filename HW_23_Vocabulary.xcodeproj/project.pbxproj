@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E372B69121FABFB70027BE91 /* WordTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E372B68F21FABFB70027BE91 /* WordTableViewCell.swift */; };
+		E372B69221FABFB70027BE91 /* WordTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E372B69021FABFB70027BE91 /* WordTableViewCell.xib */; };
+		E372B69521FABFD00027BE91 /* LearnedWordTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E372B69321FABFD00027BE91 /* LearnedWordTableViewCell.swift */; };
+		E372B69621FABFD00027BE91 /* LearnedWordTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E372B69421FABFD00027BE91 /* LearnedWordTableViewCell.xib */; };
 		E3B98713216EB433008AE543 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3B98712216EB433008AE543 /* AppDelegate.swift */; };
 		E3B98718216EB433008AE543 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3B98716216EB433008AE543 /* Main.storyboard */; };
 		E3B9871A216EB43F008AE543 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E3B98719216EB43F008AE543 /* Assets.xcassets */; };
@@ -14,14 +18,16 @@
 		E3B98729216EB88C008AE543 /* WordsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3B98728216EB88C008AE543 /* WordsListViewController.swift */; };
 		E3B9872B216EB8A2008AE543 /* NewWordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3B9872A216EB8A2008AE543 /* NewWordViewController.swift */; };
 		E3B9872D216EB8B8008AE543 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3B9872C216EB8B8008AE543 /* DetailViewController.swift */; };
-		E3B9872F216EC4CC008AE543 /* WordTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3B9872E216EC4CC008AE543 /* WordTableViewCell.swift */; };
 		E3B98731216F938D008AE543 /* Word.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3B98730216F938D008AE543 /* Word.swift */; };
 		E3B98733216F9BDE008AE543 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3B98732216F9BDE008AE543 /* DataManager.swift */; };
 		E3B98735217017A8008AE543 /* LearnedWordsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3B98734217017A8008AE543 /* LearnedWordsViewController.swift */; };
-		E3B98737217017F2008AE543 /* LearnedWordTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3B98736217017F2008AE543 /* LearnedWordTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E372B68F21FABFB70027BE91 /* WordTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordTableViewCell.swift; sourceTree = "<group>"; };
+		E372B69021FABFB70027BE91 /* WordTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WordTableViewCell.xib; sourceTree = "<group>"; };
+		E372B69321FABFD00027BE91 /* LearnedWordTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnedWordTableViewCell.swift; sourceTree = "<group>"; };
+		E372B69421FABFD00027BE91 /* LearnedWordTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LearnedWordTableViewCell.xib; sourceTree = "<group>"; };
 		E3B9870F216EB433008AE543 /* HW_23_Vocabulary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HW_23_Vocabulary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3B98712216EB433008AE543 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E3B98717216EB433008AE543 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -31,11 +37,9 @@
 		E3B98728216EB88C008AE543 /* WordsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordsListViewController.swift; sourceTree = "<group>"; };
 		E3B9872A216EB8A2008AE543 /* NewWordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewWordViewController.swift; sourceTree = "<group>"; };
 		E3B9872C216EB8B8008AE543 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
-		E3B9872E216EC4CC008AE543 /* WordTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordTableViewCell.swift; sourceTree = "<group>"; };
 		E3B98730216F938D008AE543 /* Word.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Word.swift; sourceTree = "<group>"; };
 		E3B98732216F9BDE008AE543 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		E3B98734217017A8008AE543 /* LearnedWordsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnedWordsViewController.swift; sourceTree = "<group>"; };
-		E3B98736217017F2008AE543 /* LearnedWordTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnedWordTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,8 +93,10 @@
 		E3B98725216EB7C3008AE543 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				E3B9872E216EC4CC008AE543 /* WordTableViewCell.swift */,
-				E3B98736217017F2008AE543 /* LearnedWordTableViewCell.swift */,
+				E372B68F21FABFB70027BE91 /* WordTableViewCell.swift */,
+				E372B69021FABFB70027BE91 /* WordTableViewCell.xib */,
+				E372B69321FABFD00027BE91 /* LearnedWordTableViewCell.swift */,
+				E372B69421FABFD00027BE91 /* LearnedWordTableViewCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -177,8 +183,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				E3B9871D216EB43F008AE543 /* LaunchScreen.storyboard in Resources */,
+				E372B69221FABFB70027BE91 /* WordTableViewCell.xib in Resources */,
 				E3B9871A216EB43F008AE543 /* Assets.xcassets in Resources */,
 				E3B98718216EB433008AE543 /* Main.storyboard in Resources */,
+				E372B69621FABFD00027BE91 /* LearnedWordTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -189,15 +197,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E3B98737217017F2008AE543 /* LearnedWordTableViewCell.swift in Sources */,
 				E3B98735217017A8008AE543 /* LearnedWordsViewController.swift in Sources */,
 				E3B98729216EB88C008AE543 /* WordsListViewController.swift in Sources */,
+				E372B69521FABFD00027BE91 /* LearnedWordTableViewCell.swift in Sources */,
 				E3B98713216EB433008AE543 /* AppDelegate.swift in Sources */,
 				E3B9872B216EB8A2008AE543 /* NewWordViewController.swift in Sources */,
 				E3B98733216F9BDE008AE543 /* DataManager.swift in Sources */,
 				E3B9872D216EB8B8008AE543 /* DetailViewController.swift in Sources */,
-				E3B9872F216EC4CC008AE543 /* WordTableViewCell.swift in Sources */,
 				E3B98731216F938D008AE543 /* Word.swift in Sources */,
+				E372B69121FABFB70027BE91 /* WordTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

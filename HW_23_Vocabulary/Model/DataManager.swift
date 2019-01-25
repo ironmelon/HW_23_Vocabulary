@@ -32,6 +32,18 @@ final class DataManager {
         words.insert(word, at: 0)
     }
 
+    func removeWordFromLearnedAtIndex(_ index: Int) {
+        if index >= 0 && index < learnedWords.count {
+            learnedWords.remove(at: index)
+        }
+    }
+
+    func moveWordFrom(_ from: Int, to: Int) {
+        let word = words[from]
+        words.remove(at: from)
+        words.insert(word, at: to)
+    }
+
     func markAsLearned(_ word: Word) {
         guard let removeIndex = words.index(of: word) else { return }
         words.remove(at: removeIndex)
